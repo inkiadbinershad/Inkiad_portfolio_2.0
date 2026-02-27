@@ -1,0 +1,32 @@
+import { useContext } from 'react';
+import { projects } from '../data/projects';
+import ProjectCard from '../components/ProjectCard';
+import { ThemeContext } from '../App';
+import useInView from '../hooks/useInView';
+
+const Projects = () => {
+  const { themeClasses } = useContext(ThemeContext);
+  const contentRef = useInView();
+
+  return (
+    <div className="min-h-screen" style={{ backgroundColor: themeClasses.background }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20" ref={contentRef}>
+        <h1 className="text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Projects</h1>
+        <p className="text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
+          A showcase of my recent work and contributions
+        </p>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {projects.map((project, index) => (
+            <div key={project.id} className="project-card glass rounded-xl overflow-hidden">
+              <div className="gradient-sweep"></div>
+              <ProjectCard project={project} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Projects;
